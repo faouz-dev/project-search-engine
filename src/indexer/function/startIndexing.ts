@@ -10,6 +10,7 @@ export async function startIndexing() {
     website !== null;
     website = await cursor.next()
   ) {
+    console.log("\n========================")
     console.log("Current Url : " + website.link);
     // Transformer text
     const content = website.content

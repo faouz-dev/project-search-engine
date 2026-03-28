@@ -1,8 +1,10 @@
 {
   "type": "module",
   "scripts": {
+    "dev": "npx tsc --watch",
     "build": "npx tsc",
-    "crawl": "node dist/crawler/app.js"
+    "crawl": "node dist/crawler/app.js",
+    "index": "node dist/indexer/app.js"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",

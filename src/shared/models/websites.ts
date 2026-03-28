@@ -6,6 +6,7 @@ export const webSiteSchema = new mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   urls: { type: [String], default: [] },
+  rank: { type: Number }
 });
 
 export const WebSiteModel = CRAWLER_BD.model("websites", webSiteSchema);
