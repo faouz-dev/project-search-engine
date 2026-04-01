@@ -2,9 +2,5 @@
   "extends": "./tsconfig.json",
   "include": [
     "src/**/*" // ← remplacer "src/**" par "src/**/*"
-  ],
-  "exclude": [
-    "src/indexer/function/startIndexing.ts",
-    "src/indexer/function/calculScore.ts" // ← utiliser aussi **/*
   ]
 }

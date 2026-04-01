@@ -4,6 +4,7 @@ import {
   waitForMongooseInstancesConnected,
 } from "../shared/common/mongooseConnector.js";
 import { globalWebSiteRanking } from "./function/pageRanking.js";
+import { startIndexing } from "./function/startIndexing.js";
 
 async function main() {
   // await Mongoose connection
@@ -18,7 +19,7 @@ async function main() {
     console.log("page rank settled");
   }
 
-  // await startIndexing();
+  await startIndexing();
   process.exit(0);
 }
 main();

@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { INDEXER_DB } from "../common/mongooseConnector.js";
 
 const urlScoreSchema = new mongoose.Schema(
   {
-    link: { type: String, required: true },
+    page_id: { type: Types.ObjectId, required: true },
     score: { type: Number, required: true },
   },
   { _id: false },
