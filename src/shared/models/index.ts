@@ -11,7 +11,7 @@ const urlScoreSchema = new mongoose.Schema(
 
 const IndexSchema = new mongoose.Schema<{
   word: string;
-  urls: { link: string; score: number }[];
+  urls: { page_id: Types.ObjectId; score: number }[];
 }>({
   word: { type: String, required: true, unique: true },
   urls: { type: [urlScoreSchema], default: [] },
