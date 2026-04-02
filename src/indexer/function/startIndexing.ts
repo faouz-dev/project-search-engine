@@ -48,7 +48,7 @@ export async function startIndexing() {
       pageMap.set(content.page_id.toString(), prev + 1);
     }
   }*/
-        const wordsSet = removeStopwords(
+        const words = removeStopwords(
       content.clean_text?.split(" ").filter((p) => p.length !== 0) ?? [],
       [...fra, ...eng],
     );
