@@ -50,7 +50,7 @@ export function tfIdf(
   totalDocs: number,
 ): number {
   const tf = word_occurence / page_words_count;
-  const idf = Math.log(totalDocs + 1 / (docsWithWord + 1));
+  const idf = Math.log((totalDocs + 1) / (docsWithWord + 1));
   return tf * idf;
 }
 ```
