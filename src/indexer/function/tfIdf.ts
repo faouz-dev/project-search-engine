@@ -18,7 +18,7 @@ export function tfIdf(
   const tf = word_occurence / page_words_count;
 
   // IDF
-  const idf = Math.log((totalDocs + 1 )/ (docsWithWord + 1));
+  const idf = Math.log((totalDocs + 1) / (docsWithWord + 1));
 
   return tf * idf;
 }
