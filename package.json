@@ -5,13 +5,15 @@
     "build": "npx tsc -p tsconfig.build.json",
     "crawl": "node dist/crawler/app.js",
     "index": "node dist/indexer/app.js",
-    "web": "node dist/webapp/app.js"
+    "web": "node dist/webapp/app.js",
+    "format": "npx prettier --write ./src"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/jsdom": "^28.0.1",
     "@types/node": "^25.5.0",
     "@types/stopword": "^2.0.3",
+    "prettier": "^3.8.1",
     "typescript": "^6.0.2"
   },
   "dependencies": {
