@@ -56,10 +56,13 @@ export function extractSmartText($: CheerioAPI, html: string) {
 
   $body.find("p, h1, h2, h3, h4, h5, h6, li, blockquote").each((i, elem) => {
     let text = $(elem).text().trim().toLowerCase();
-    contentBlocks.push(text);
+    // Filtrer les textes un peu trop cours
+    if (text.length > 15) {
+      contentBlocks.push(text);
+    }
   });
 
-  result.main_content = contentBlocks.join("\n\n");
+  result.main_content = contentBlocks.join("\n");
   result.word_count = result.main_content.split(/\s+/).length;
 
   return result;

@@ -141,7 +141,7 @@ async function crawl() {
         },
       })),
     );
-    console.log("Url crawled : " + urlToScrapp);
+    // console.log("Url crawled : " + urlToScrapp);
   } catch (error) {
     console.error(
       "Failed to get url : " +

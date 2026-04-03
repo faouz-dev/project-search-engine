@@ -1,21 +1,17 @@
-import type { Request, Response } from "express";
 import { removeStopwords, fra, eng } from "stopword";
 import { IndexerModel } from "../../shared/models/index.js";
 import { PageModel } from "../../shared/models/page.js";
 import { PageContentModel } from "../../shared/models/pageContent.js";
-import { Types } from "mongoose";
+import { formatText } from "../../shared/common/formatText.js";
+import { STOPWORDS } from "../../shared/common/stopwords.js";
 
 export async function query(q: string) {
   // Tokenisation et nettoyage
-  const searchArray = q
-    .trim()
-    .toLowerCase()
-    .split(/\s+/) // Meilleure gestion des espaces multiples
-    .filter((word) => word.length > 0);
+  const searchArray = formatText(q).split(/\s+/);
 
   if (searchArray.length === 0) throw Error("No search input");
 
-  const tokens = removeStopwords(searchArray, [...fra, ...eng]);
+  const tokens = removeStopwords(searchArray, STOPWORDS);
 
   if (tokens.length === 0) throw Error("only stopWords included");
 

@@ -6,15 +6,14 @@ import {
   waitForMongooseInstancesConnected,
 } from "../shared/common/mongooseConnector.js";
 import { query } from "./controllers/query.js";
+import { home } from "./controllers/home.js";
 
 const app = express();
 app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", path.join(process.cwd(), "src", "webapp", "views"));
 
-app.get("/", (req, res) => {
-  res.render("home");
-});
+app.get("/", home);
 
 app.get("/search", query);
 

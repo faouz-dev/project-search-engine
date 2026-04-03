@@ -32,7 +32,7 @@ export async function isAllowedToScrap(url: string) {
       }
 
       //save empty string in cache
-      console.log("no robot.txt found for : " + urlObject.origin);
+      // console.log("no robot.txt found for : " + urlObject.origin);
       robotTxtTextContent = "";
       robots_txt_caches.set(urlObject.origin, "");
     }

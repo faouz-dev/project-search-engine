@@ -129,6 +129,7 @@
         padding: 10px 20px;
         background-color: #ffffff;
         box-shadow: 0 2px 5px 1px rgba(64, 60, 57, 0.16);
+        flex-direction: column;
       }
       .search-box:hover {
         box-shadow: 0 2px 8px 1px rgba(64, 60, 57, 0.24);
@@ -226,6 +227,9 @@
             placeholder="Cherchez sur SearchHub..."
             required
           />
+        </div>
+        <div style="text-align: center; margin-top: 5px; color: #70757a">
+          <i> Environs <%= pagesCount %> pages web parcourue(s) </i>
         </div>
         <div class="button-container">
           <button type="submit">Recherche SearchHub</button>

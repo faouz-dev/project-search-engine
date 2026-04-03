@@ -2,6 +2,7 @@ import axios from "axios";
 import { isAllowedToScrap, tryFiltreUnallowed } from "./CrawablePathChecker.js";
 import * as Cheerio from "cheerio";
 import { extractSmartText } from "./extracSmartText.js";
+import { formatText } from "../../shared/common/formatText.js";
 
 export async function fetcher(url: string) {
   const isAllowed = await isAllowedToScrap(url);
@@ -32,11 +33,9 @@ export async function fetcher(url: string) {
 
   return {
     title: extractResult.title,
-    content:
-      extractResult.main_content
-        ?.toLowerCase()
-        .replace(/[^\w\s]/g, "")
-        .replace(/\s+/g, " ") ?? null,
+    content: extractResult.main_content
+      ? formatText(extractResult.main_content)
+      : "",
     meta_description: extractResult.meta_description,
     word_Count: extractResult.word_count,
     urls: filtredUrl,

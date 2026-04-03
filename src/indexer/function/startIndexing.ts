@@ -6,11 +6,20 @@ import pLimit from "p-limit";
 import { PageContentModel } from "../../shared/models/pageContent.js";
 import { chunkArray } from "./chunkArray.js";
 import { Types } from "mongoose";
+import { STOPWORDS } from "../../shared/common/stopwords.js";
+
+const MAX_SYNC_INDEXING = process.env.MAX_SYNC_INDEXING
+  ? parseInt(process.env.MAX_SYNC_INDEXING as string)
+  : 10;
 
 export async function startIndexing() {
-  const pages = await PageModel.find({}, { _id: 1, url: 1, rank: 1 });
+  // Get only pages with rank
+  const pages = await PageModel.find(
+    { rank: { $exists: true } },
+    { _id: 1, url: 1, rank: 1 },
+  ).lean();
   const pages_content = await PageContentModel.find(
-    {},
+    { page_id: { $in: pages.map((p) => p._id) } },
     { page_id: 1, clean_text: 1, word_count: 1 },
   );
 
@@ -34,8 +43,8 @@ export async function startIndexing() {
 
     const wordsSet = new Set(
       removeStopwords(
-        content.clean_text?.split(" ").filter((p) => p.length !== 0) ?? [],
-        [...fra, ...eng],
+        content.clean_text?.split(/\s+/).filter((p) => p.length !== 0) ?? [],
+        STOPWORDS,
       ),
     );
     for (const w of wordsSet) {
@@ -63,7 +72,7 @@ export async function startIndexing() {
 
   ////////////////////////////////
 
-  const limit = pLimit(500);
+  const limit = pLimit(MAX_SYNC_INDEXING);
   for (const chunk of chunkWords) {
     const scoreMap = new Map<string, { page_id: string; score: number }[]>();
 
