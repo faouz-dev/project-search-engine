@@ -33,11 +33,11 @@ export async function query(req: Request, res: Response) {
     }
 
     const allResults = searchResult.results;
-    const total = allResults.length;
+    const total = allResults!.length;
     const totalPages = Math.ceil(total / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const results = allResults.slice(startIndex, endIndex);
+    const results = allResults!.slice(startIndex, endIndex);
 
     return res.render("search", {
       query: q,

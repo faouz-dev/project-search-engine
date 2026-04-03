@@ -13,14 +13,14 @@ export async function query(q: string) {
 
   const tokens = removeStopwords(searchArray, STOPWORDS);
 
-  if (tokens.length === 0) throw Error("only stopWords included");
+  if (tokens.length === 0) return null;
 
   // Récupération des index
   const indexResults = await IndexerModel.find({
     word: { $in: tokens },
-  }).lean(); // Utiliser lean() pour de meilleures performances
+  }).lean();
 
-  if (indexResults.length === 0) return null;
+  if (indexResults.length === 0) return { success: false };
 
   const allPageIds = [
     ...new Set(
