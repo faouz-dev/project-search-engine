@@ -6,6 +6,7 @@
     "crawl": "node dist/crawler/app.js",
     "index": "node dist/indexer/app.js",
     "web": "node dist/webapp/app.js",
+    "cronprocess": "node dist/cronprocess/app.js",
     "format": "npx prettier --write ./src"
   },
   "devDependencies": {
