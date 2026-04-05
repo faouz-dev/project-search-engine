@@ -14,11 +14,26 @@ export function tfIdf(
   docsWithWord: number,
   totalDocs: number,
 ): number {
-  // TF
-  const tf = word_occurence / page_words_count;
+  if (
+    !Number.isFinite(word_occurence) ||
+    !Number.isFinite(page_words_count) ||
+    !Number.isFinite(docsWithWord) ||
+    !Number.isFinite(totalDocs)
+  ) return 0;
 
-  // IDF
-  const idf = Math.log((totalDocs + 1) / (docsWithWord + 1));
+  if (word_occurence < 0 || page_words_count <= 0 || docsWithWord < 0 || totalDocs <= 0) return 0;
 
-  return tf * idf;
+  if (docsWithWord > totalDocs) docsWithWord = totalDocs;
+
+  // TF logarithmique — atténue l'avantage des mots très répétés
+  const tf = Math.log(1 + word_occurence / page_words_count);
+
+  // IDF 
+  const idf = Math.log((totalDocs + 1) / (docsWithWord + 1)) + 1;
+
+  const score = tf * idf;
+
+  if (!Number.isFinite(score) || score < 0) return 0;
+
+  return score;
 }
